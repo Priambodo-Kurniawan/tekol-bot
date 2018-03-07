@@ -34,13 +34,14 @@ const jobBuild = (bot, chat_id, job_name, branch) => {
  * @param {Object} bot bot instance
  * @param {Number} chat_id sender chat id
  * @param {String} job_name jenkins job name
+ * @param {String} zone environment zone
  */
-const getLastBuildStatus = (bot, chat_id, job_name) => {
+const getLastBuildStatus = (bot, chat_id, job_name, zone) => {
     jenkins.job.get(job_name, (err, data) => {
         if (err) throw err
         const build_number = data.builds[0].number
 
-        jobBuildStatus(bot, chat_id, job_name, build_number)
+        jobBuildStatus(bot, chat_id, job_name, build_number, zone)
     })
 }
 
@@ -50,8 +51,9 @@ const getLastBuildStatus = (bot, chat_id, job_name) => {
  * @param {Number} chat_id sender chat id
  * @param {String} job_name jenkins job name
  * @param {Number} build_number jenkins build number
+ * @param {String} zone environment zone
  */
-const jobBuildStatus = (bot, chat_id, job_name, build_number) => {
+const jobBuildStatus = (bot, chat_id, job_name, build_number, zone) => {
     jenkins.build.get(job_name, build_number, (err, data) => {
         if (err) throw err
 
@@ -62,6 +64,7 @@ const jobBuildStatus = (bot, chat_id, job_name, build_number) => {
         const build_time_spent = convertMs(data.duration)
         const build_time_raw = new Date(data.timestamp)
         const build_time = dateformat(build_time_raw, 'mmmm dd, yyyy HH:MM')
+
         let emoji_status = ''
 
         if (build_result == 'SUCCESS') {
@@ -73,6 +76,7 @@ const jobBuildStatus = (bot, chat_id, job_name, build_number) => {
         let response_message = `<b>Build Status</b>\n`
             response_message += `============\n`
             response_message += `ID: ${build_target}\n`
+            response_message += `Zone: ${zone}\n`
             response_message += `Status: ${build_result} ${emoji_status}\n`
             response_message += `Branch: ${build_branch}\n`
             response_message += `User: ${build_user}\n`
