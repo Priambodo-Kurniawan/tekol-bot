@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "dotenv": "^5.0.1",
     "jenkins": "^0.20.1",
     "jenkins-api": "^0.3.1",
+    "node-emoji": "^1.8.1",
     "node-telegram-bot-api": "^0.30.0"
   }
 }
