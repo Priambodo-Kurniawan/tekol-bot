@@ -1,8 +1,8 @@
 require('dotenv').config()
 
 const TelegramBot = require('node-telegram-bot-api')
-const jobBuild = require('./jenkins').jobBuild
-const getLastBuildStatus = require('./jenkins').getLastBuildStatus
+const jobBuild = require('./jenkinsCI').jobBuild
+const getLastBuildStatus = require('./jenkinsCI').getLastBuildStatus
 const bot = new TelegramBot(process.env.TOKEN, { polling: true })
 
 const job_dev_ss = process.env.JOB_DEV_CORE_NAME
@@ -15,12 +15,20 @@ bot.onText(/\/build dev_ss (.+)/, (msg, match) => {
     const chat_id = msg.chat.id
     const branch = match[1]
 
-    // validate branch
     if (branch) {
-        jobBuild(job_dev_ss, branch)
-        bot.sendMessage(chat_id, branch)
-    } else {
-        bot.sendMessage(chat_id, 'Target branch harus di isi')
+        jobBuild(bot, chat_id, job_dev_ss, branch)
+    }
+})
+
+/**
+ * listen /build dev_core [branch] command
+ */
+bot.onText(/\/build dev_core/, (msg, match) => {
+    const chat_id = msg.chat.id
+    const branch = match[1]
+
+    if (branch) {
+        jobBuild(bot, chat_id, job_dev_ss, branch)
     }
 })
 
