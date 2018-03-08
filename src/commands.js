@@ -45,6 +45,18 @@ bot.onText(/\/build dev_core (.+)/, (msg, match) => {
 })
 
 /**
+ * listen /build dev_neo [branch] command
+ */
+bot.onText(/\/build dev_neo (.+)/, (msg, match) => {
+    const chat_id = msg.chat.id
+    const branch = match[1]
+
+    if (branch) {
+        jobBuild(bot, chat_id, job_dev_neo, branch)
+    }
+})
+
+/**
  * listen /status [job] command
  */
 bot.onText(/\/status (.+)/, (msg, match) => {
