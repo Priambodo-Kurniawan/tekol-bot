@@ -25,7 +25,10 @@ const jobBuild = (bot, chat_id, job_name, branch) => {
     }, (err) => {
         if (err) throw err
 
-        bot.sendMessage(chat_id, 'Build on progress...')
+        let response_message = `Build on progress...\n`
+            response_message += `Silakan cek command /status ${job_name}`
+
+        bot.sendMessage(chat_id, response_message)
     })
 }
 
