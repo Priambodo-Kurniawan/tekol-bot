@@ -82,7 +82,7 @@ const jobBuildStatus = (bot, chat_id, job_name, build_number, zone) => {
         let response_message = `<b>Build Status</b>\n`
             response_message += `============\n`
             response_message += `ID: ${build_target}\n`
-            response_message += `Zone: ${zone}\n`
+            response_message += `Host: ${zone}\n`
             response_message += `Status: ${build_result} ${emoji_status}\n`
             response_message += `Branch: ${build_branch}\n`
             response_message += `User: ${build_user}\n`
