@@ -10,6 +10,15 @@ const job_dev_core = process.env.JOB_DEV_CORE
 const job_dev_neo = process.env.JOB_DEV_NEO
 
 /**
+ * listen /start command
+ */
+bot.onText(/\/start/, (msg) => {
+    const chat_id = msg.chat.id
+
+    let response_message = `Halo paduka, cekidot /help ya kalau lupa..`
+})
+
+/**
  * listen /build dev_ss [branch] command
  */
 bot.onText(/\/build dev_ss (.+)/, (msg, match) => {
@@ -57,4 +66,35 @@ bot.onText(/\/status (.+)/, (msg, match) => {
         default:
             bot.sendMessage(chat_id, 'Job nya ga ada, typo ga tuh?')
     }
+})
+
+/**
+ * listen /help command
+ */
+bot.onText(/\/help/, (msg) => {
+    const chat_id = msg.chat.id
+
+    let response_message = `Available commands:\n`
+        response_message += `/build - trigger build\n`
+        response_message += `/status - check last build status\n`
+        response_message += `/jobs - list available jobs\n\n`
+        response_message += `Usage:\n`
+        response_message += `/build <job> <branch>\n`
+        response_message += `/status <job>`
+    
+    bot.sendMessage(chat_id, response_message)
+})
+
+/**
+ * listen /jobs command
+ */
+bot.onText(/\/jobs/, (msg) => {
+    const chat_id = msg.chat.id
+
+    let response_message = `Available jobs:\n`
+        response_message += `dev_core\n`
+        response_message += `dev_ss\n`
+        response_message += `dev_neo`
+    
+    bot.sendMessage(chat_id, response_message)
 })
