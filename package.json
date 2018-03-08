@@ -4,7 +4,7 @@
   "description": "Trigger Jenkins job from Telegram",
   "main": "./src/commands.js",
   "scripts": {
-    "start": "nohup node src/commands.js",
+    "start": "nohup node src/commands.js &",
     "stop": "pkill node"
   },
   "keywords": [],
