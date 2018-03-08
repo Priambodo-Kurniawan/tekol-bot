@@ -94,7 +94,10 @@ bot.onText(/\/help/, (msg) => {
         response_message += `/jobs - list available jobs\n\n`
         response_message += `Usage:\n`
         response_message += `/build <job> <branch>\n`
-        response_message += `/status <job>`
+        response_message += `/status <job>\n\n`
+        response_message += `Example:\n`
+        response_message += `/build dev_neo master\n`
+        response_message += `/status dev_neo`
     
     bot.sendMessage(chat_id, response_message)
 })
