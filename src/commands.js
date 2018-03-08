@@ -14,7 +14,7 @@ const job_dev_neo = process.env.JOB_DEV_NEO
  * listen /start command
  */
 bot.onText(/\/start/, (msg) => {
-    botan.track(msg.text)
+    botan.track(msg)
 
     const chat_id = msg.chat.id
     let response_message = `Halo paduka, cekidot /help ya kalau lupa..`
@@ -26,7 +26,7 @@ bot.onText(/\/start/, (msg) => {
  * listen /build dev_ss [branch] command
  */
 bot.onText(/\/build dev_ss (.+)/, (msg, match) => {
-    botan.track(msg.text)
+    botan.track(msg)
 
     const chat_id = msg.chat.id
     const branch = match[1]
@@ -40,7 +40,7 @@ bot.onText(/\/build dev_ss (.+)/, (msg, match) => {
  * listen /build dev_core [branch] command
  */
 bot.onText(/\/build dev_core (.+)/, (msg, match) => {
-    botan.track(msg.text)
+    botan.track(msg)
 
     const chat_id = msg.chat.id
     const branch = match[1]
@@ -54,7 +54,7 @@ bot.onText(/\/build dev_core (.+)/, (msg, match) => {
  * listen /build dev_neo [branch] command
  */
 bot.onText(/\/build dev_neo (.+)/, (msg, match) => {
-    botan.track(msg.text)
+    botan.track(msg)
 
     const chat_id = msg.chat.id
     const branch = match[1]
@@ -68,7 +68,7 @@ bot.onText(/\/build dev_neo (.+)/, (msg, match) => {
  * listen /status [job] command
  */
 bot.onText(/\/status (.+)/, (msg, match) => {
-    botan.track(msg.text)
+    botan.track(msg)
 
     const chat_id = msg.chat.id
     const job_name = match[1]
@@ -100,7 +100,7 @@ bot.onText(/\/status (.+)/, (msg, match) => {
  * listen /help command
  */
 bot.onText(/\/help/, (msg) => {
-    botan.track(msg.text)
+    botan.track(msg)
 
     const chat_id = msg.chat.id
     let response_message = `Available commands:\n`
@@ -121,7 +121,7 @@ bot.onText(/\/help/, (msg) => {
  * listen /jobs command
  */
 bot.onText(/\/jobs/, (msg) => {
-    botan.track(msg.text)
+    botan.track(msg)
 
     const chat_id = msg.chat.id
     let response_message = `Available jobs:\n`
