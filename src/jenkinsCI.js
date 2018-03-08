@@ -17,6 +17,16 @@ const jenkins = require('jenkins')({
  * @param {String} branch git branch
  */
 const jobBuild = (bot, chat_id, job_name, branch) => {
+    let job_shortname = ''
+
+    if (job_name == process.env.JOB_DEV_SS) {
+        job_shortname = 'dev_ss'
+    } else if (job_name == process.env.JOB_DEV_CORE) {
+        job_shortname = 'dev_core'
+    } else if (job_name == process.env.JOB_DEV_NEO) {
+        job_shortname = 'dev_neo'
+    }
+
     jenkins.job.build({
         name: job_name,
         parameters: {
@@ -26,7 +36,7 @@ const jobBuild = (bot, chat_id, job_name, branch) => {
         if (err) throw err
 
         let response_message = `Build on progress...\n`
-            response_message += `Silakan cek command /status ${job_name}`
+            response_message += `Silakan cek command /status ${job_shortname}`
 
         bot.sendMessage(chat_id, response_message)
     })

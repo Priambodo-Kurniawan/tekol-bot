@@ -1,10 +1,11 @@
 {
-  "name": "loketbot",
+  "name": "tekolbot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Trigger Jenkins job from Telegram",
+  "main": "./src/commands.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nohup node src/commands.js",
+    "stop": "pkill node"
   },
   "keywords": [],
   "author": "",
