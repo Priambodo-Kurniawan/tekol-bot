@@ -58,19 +58,25 @@ const jobBuildStatus = (bot, chat_id, job_name, build_number, zone) => {
         if (err) throw err
 
         const build_target = data.fullDisplayName
-        const build_result = data.result
+        const build_on_queue = data.building
         const build_branch = data.actions[0].parameters[0].value
         const build_user = data.actions[1].causes[0].userName
         const build_time_spent = convertMs(data.duration)
         const build_time_raw = new Date(data.timestamp)
         const build_time = dateformat(build_time_raw, 'mmmm dd, yyyy HH:MM')
 
+        let build_result = data.result
         let emoji_status = ''
 
-        if (build_result == 'SUCCESS') {
-            emoji_status = emoji.get('white_check_mark')
+        if (build_on_queue) {
+            build_result = 'Building'
+            emoji_status = emoji.get('gear')
         } else {
-            emoji_status = emoji.get('x')
+            if (build_result == 'SUCCESS') {
+                emoji_status = emoji.get('white_check_mark')
+            } else {
+                emoji_status = emoji.get('x')
+            }
         }
 
         let response_message = `<b>Build Status</b>\n`
