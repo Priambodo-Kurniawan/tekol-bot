@@ -7,6 +7,7 @@ const bot = new TelegramBot(process.env.TOKEN, { polling: true })
 
 const job_dev_ss = process.env.JOB_DEV_SS
 const job_dev_core = process.env.JOB_DEV_CORE
+const job_dev_neo = process.env.JOB_DEV_NEO
 
 /**
  * listen /build dev_ss [branch] command
@@ -48,6 +49,10 @@ bot.onText(/\/status (.+)/, (msg, match) => {
         case 'dev_core':
             zone = process.env.ZONE_DEV_CORE
             getLastBuildStatus(bot, chat_id, job_dev_core, zone)
+            break
+        case 'dev_neo':
+            zone = process.env.ZONE_DEV_NEO
+            getLastBuildStatus(bot, chat_id, job_dev_neo, zone)
             break
         default:
             bot.sendMessage(chat_id, 'Job nya ga ada, typo ga tuh?')
