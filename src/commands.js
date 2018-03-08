@@ -5,8 +5,8 @@ const jobBuild = require('./jenkinsCI').jobBuild
 const getLastBuildStatus = require('./jenkinsCI').getLastBuildStatus
 const bot = new TelegramBot(process.env.TOKEN, { polling: true })
 
-const job_dev_ss = process.env.JOB_DEV_CORE_NAME
-const job_dev_core = process.env.JOB_DEV_CORE_NAME
+const job_dev_ss = process.env.JOB_DEV_SS
+const job_dev_core = process.env.JOB_DEV_CORE
 
 /**
  * listen /build dev_ss [branch] command
@@ -28,7 +28,7 @@ bot.onText(/\/build dev_core (.+)/, (msg, match) => {
     const branch = match[1]
 
     if (branch) {
-        jobBuild(bot, chat_id, job_dev_ss, branch)
+        jobBuild(bot, chat_id, job_dev_core, branch)
     }
 })
 
