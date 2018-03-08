@@ -4,7 +4,7 @@ const TelegramBot = require('node-telegram-bot-api')
 const jobBuild = require('./jenkinsCI').jobBuild
 const getLastBuildStatus = require('./jenkinsCI').getLastBuildStatus
 const bot = new TelegramBot(process.env.TOKEN, { polling: true })
-const botanio = require('botanio')(process.env.BOTANIO_API_KEY)
+const botan = require('botanio')(process.env.BOTANIO_API_KEY)
 
 const job_dev_ss = process.env.JOB_DEV_SS
 const job_dev_core = process.env.JOB_DEV_CORE
@@ -122,7 +122,7 @@ bot.onText(/\/help/, (msg) => {
  */
 bot.onText(/\/jobs/, (msg) => {
     botan.track(msg)
-    
+
     const chat_id = msg.chat.id
     let response_message = `Available jobs:\n`
         response_message += `dev_core\n`
