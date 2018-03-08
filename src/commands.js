@@ -16,6 +16,8 @@ bot.onText(/\/start/, (msg) => {
     const chat_id = msg.chat.id
 
     let response_message = `Halo paduka, cekidot /help ya kalau lupa..`
+
+    bot.sendMessage(chat_id, response_message)
 })
 
 /**
