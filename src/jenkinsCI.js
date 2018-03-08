@@ -19,12 +19,21 @@ const jenkins = require('jenkins')({
 const jobBuild = (bot, chat_id, job_name, branch) => {
     let job_shortname = ''
 
-    if (job_name == process.env.JOB_DEV_SS) {
-        job_shortname = 'dev_ss'
-    } else if (job_name == process.env.JOB_DEV_CORE) {
-        job_shortname = 'dev_core'
-    } else if (job_name == process.env.JOB_DEV_NEO) {
-        job_shortname = 'dev_neo'
+    switch (job_name) {
+        case process.env.JOB_DEV_SS:
+            job_shortname = 'dev_ss'
+            break;
+        
+        case process.env.JOB_DEV_CORE:
+            job_shortname = 'dev_core'
+            break
+        
+        case process.env.JOB_DEV_NEO:
+            job_shortname = 'dev_neo'
+            break
+    
+        default:
+            break;
     }
 
     jenkins.job.build({
@@ -80,6 +89,7 @@ const jobBuildStatus = (bot, chat_id, job_name, build_number, zone) => {
 
         let build_result = data.result
         let emoji_status = ''
+        let build_estimate = convertMs(data.estimatedDuration)
 
         if (build_on_queue) {
             build_result = 'Building'
@@ -99,7 +109,13 @@ const jobBuildStatus = (bot, chat_id, job_name, build_number, zone) => {
             response_message += `Status: ${build_result} ${emoji_status}\n`
             response_message += `Branch: ${build_branch}\n`
             response_message += `User: ${build_user}\n`
-            response_message += `Duration: ${build_time_spent}\n`
+
+            if (build_on_queue) {
+                response_message += `Estimated: ${build_estimate} Min\n`
+            } else {
+                response_message += `Duration: ${build_time_spent} Min\n`
+            }
+
             response_message += `Date: ${build_time}`
         
         
