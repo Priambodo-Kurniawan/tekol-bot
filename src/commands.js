@@ -20,8 +20,19 @@ bot.onText(/\/start/, (msg) => {
     let response_message = `Halo paduka, cekidot /help ya kalau lupa..`
 
     bot.sendMessage(chat_id, response_message)
+})
 
+/**
+ * listen /pfft
+ */
+bot.onText(/\/pfft/, (msg) => {
+    botan.track(msg)
+
+    const chat_id = msg.chat.id
+    
     if (msg.from.id == process.env.USER_RIZARMA) {
+        bot.sendMessage(chat_id, 'Ok granted')
+    } else {
         bot.sendMessage(chat_id, 'Code 3366 - PM @Rizarma kalo liat pesan ini, thx')
     }
 })
