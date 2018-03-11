@@ -159,3 +159,15 @@ bot.onText(/\/pay pmt (.+)/, (msg, match) => {
 
     midtrans(bot, chat_id, 'pmt', va_number)
 })
+
+/**
+ * listen /pay <bca> <>
+ */
+bot.onText(/\/pay bca (.+)/, (msg, match) => {
+    botan.track(msg)
+
+    const chat_id = msg.chat.id
+    const va_number = match[1]
+
+    midtrans(bot, chat_id, 'bca', va_number)
+})
