@@ -3,6 +3,7 @@ require('dotenv').config()
 const TelegramBot = require('node-telegram-bot-api')
 const jobBuild = require('./jenkinsCI').jobBuild
 const getLastBuildStatus = require('./jenkinsCI').getLastBuildStatus
+const midtrans = require('./payments').midtrans
 const bot = new TelegramBot(process.env.TOKEN, { polling: true })
 const botan = require('botanio')(process.env.BOTANIO_API_KEY)
 
@@ -145,4 +146,16 @@ bot.onText(/\/jobs/, (msg) => {
         response_message += `dev_neo`
     
     bot.sendMessage(chat_id, response_message)
+})
+
+/**
+ * listen /pay <pmt> <>
+ */
+bot.onText(/\/pay pmt (.+)/, (msg, match) => {
+    botan.track(msg)
+
+    const chat_id = msg.chat.id
+    const va_number = match[1]
+
+    midtrans(bot, chat_id, 'pmt', va_number)
 })
