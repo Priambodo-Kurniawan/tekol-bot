@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const Nightmare = require('nightmare')
 const nightmare = Nightmare({
-    show: true,
+    show: false,
     pollInterval: 1000,
     waitTimeout: 3000,
     typeInterval: 25
