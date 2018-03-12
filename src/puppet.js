@@ -1,4 +1,8 @@
+const Xvfb = require('xvfb');
+const xvfb = new Xvfb();
 const puppeteer = require('puppeteer');
+
+xvfb.startSync();
 
 (async () => {
     const browser = await puppeteer.launch({
@@ -13,3 +17,5 @@ const puppeteer = require('puppeteer');
   
     await browser.close();
 })();
+
+xvfb.stopSync();

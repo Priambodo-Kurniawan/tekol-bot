@@ -16,9 +16,9 @@
     "dotenv": "^5.0.1",
     "jenkins": "^0.20.1",
     "jenkins-api": "^0.3.1",
-    "nightmare": "^3.0.0",
     "node-emoji": "^1.8.1",
+    "node-horseman": "^3.3.0",
     "node-telegram-bot-api": "^0.30.0",
-    "puppeteer": "^1.1.1"
+    "phantomjs": "^2.1.7"
   }
 }
